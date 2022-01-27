@@ -19,10 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import com.compose_components.R
 import com.compose_components.text.TextMain
 import com.style.GreyColor
-import com.style.dimen10
+import com.style.cornersRadius
 import com.style.dimen16
 import com.style.dimen20
 import com.style.dimen8
@@ -30,83 +31,129 @@ import com.style.dimen8
 @Preview
 @Composable
 fun CardIconStartPreview() {
-    CardIcon(label = "Label", icon = R.drawable.ic_open_book)
+    CardIcon(label = "Card Label", icon = R.drawable.ic_open_book)
 }
 
 @Preview
 @Composable
 fun CardIconSwitchPreview() {
-    CardIconSwitch(label = "Label", icon = R.drawable.ic_open_book, isChecked = true, onChangeListener = {})
+    CardIconSwitch(label = "Card Label", icon = R.drawable.ic_open_book, isChecked = true, onChangeListener = {})
 }
+
+/**
+Customizable Card with a start icon.
+@param modifier Modifier for the card.
+@param label Label text to show.
+@param icon Start icon.
+@param iconSize Start icon height and width.
+@param elevation Card elevation
+@param contentPadding Padding between card, content and card border.
+@param textSeparation Padding between text and icon.
+@param cornerRadius Card radius
+@param textColor Color of label text.
+@param iconTint Color of icon.
+@param onClickListener Listener for card when clicking.
+ **/
 
 @Composable
 fun CardIcon(
     modifier: Modifier = Modifier,
     label: String,
     icon: Int,
+    iconSize: Dp = dimen20,
+    elevation: Dp = dimen8,
+    contentPadding: Dp = dimen16,
+    textSeparation: Dp = dimen16,
+    cornerRadius: Dp = cornersRadius,
     textColor: Color = MaterialTheme.colors.primary,
     iconTint: Color = MaterialTheme.colors.primary,
     onClickListener: (() -> Unit)? = null,
+    contentDescription: String? = null,
 ) {
     Card(
-        shape = RoundedCornerShape(dimen10),
+        shape = RoundedCornerShape(cornerRadius),
         modifier = modifier
             .fillMaxWidth()
             .clickable { onClickListener?.invoke() },
-        elevation = dimen8) {
-        Column(modifier = Modifier.padding(dimen16)) {
+        elevation = elevation
+    ) {
+        Column(modifier = Modifier.padding(contentPadding)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
-                    modifier = Modifier.size(dimen20),
+                    modifier = Modifier.size(iconSize),
                     painter = painterResource(id = icon),
-                    contentDescription = null,
+                    contentDescription = contentDescription,
                     tint = iconTint
                 )
                 TextMain(
-                    modifier = Modifier.padding(start = dimen16),
+                    modifier = Modifier.padding(start = textSeparation),
                     text = label,
-                    color = textColor)
+                    color = textColor
+                )
             }
         }
     }
 }
+
+/**
+Customizable Card with a start icon and a switch.
+@param modifier Modifier for the card.
+@param label Label text to show.
+@param icon Start icon.
+@param iconSize Start icon height and width.
+@param elevation Card elevation
+@param contentPadding Padding between card content and card border.
+@param textSeparation Padding between text and icon.
+@param cornerRadius Card radius
+@param textColor Color of label text.
+@param iconTint Color of icon.
+@param isChecked Switch selected state.
+@param switchColors Colors for switch.
+@param maxLines Number of label lines.
+@param onChangeListener Switch click action.
+ **/
 
 @Composable
 fun CardIconSwitch(
     modifier: Modifier = Modifier,
     label: String,
     icon: Int,
-    iconTint: Color = MaterialTheme.colors.primary,
+    iconSize: Dp = dimen20,
+    elevation: Dp = dimen8,
+    contentPadding: Dp = dimen16,
+    textSeparation: Dp = dimen16,
+    cornerRadius: Dp = cornersRadius,
     textColor: Color = MaterialTheme.colors.primary,
+    iconTint: Color = MaterialTheme.colors.primary,
     isChecked: Boolean,
-    onChangeListener: ((Boolean) -> Unit)? = null,
-
     switchColors: SwitchColors? = null,
+    maxLines: Int = 1,
+    onChangeListener: ((Boolean) -> Unit)? = null,
+    contentDescription: String? = null,
 ) {
     Card(
-        shape = RoundedCornerShape(dimen10),
-        modifier = modifier
-            .fillMaxWidth(),
-        elevation = dimen8
+        shape = RoundedCornerShape(cornerRadius),
+        modifier = modifier.fillMaxWidth(),
+        elevation = elevation
     ) {
-        Column(modifier = Modifier.padding(horizontal = dimen16)) {
+        Column(modifier = Modifier.padding(horizontal = contentPadding)) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Icon(
-                    modifier = Modifier.size(dimen20),
+                    modifier = Modifier.size(iconSize),
                     painter = painterResource(id = icon),
-                    contentDescription = null,
+                    contentDescription = contentDescription,
                     tint = iconTint
                 )
                 TextMain(
                     modifier = Modifier
-                        .padding(start = dimen16)
+                        .padding(horizontal = textSeparation)
                         .weight(9f),
                     text = label,
                     color = textColor,
-                    maxLines = 1)
+                    maxLines = maxLines)
                 Switch(
                     modifier = Modifier.weight(1f),
                     checked = isChecked,
