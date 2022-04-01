@@ -2,33 +2,18 @@ package com.compose_components.inputText
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -58,25 +43,24 @@ fun InputTextPrimary(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     acceptButtonAction: ImeAction? = null,
 ) {
-    var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
-    val textFieldValue = textFieldValueState.copy(text = value)
+    var textFieldValueState by remember { mutableStateOf(value) }
     val focusManager = LocalFocusManager.current
     OutlinedTextField(
         enabled = enabled,
         readOnly = readOnly,
-        value = textFieldValue,
+        value = textFieldValueState,
         onValueChange = {
             maxLength?.let { maxLength ->
-                if (it.text.length <= maxLength) {
+                if (it.length <= maxLength) {
                     textFieldValueState = it
-                    if (value != it.text) {
-                        onValueChange(it.text)
+                    if (value != it) {
+                        onValueChange(it)
                     }
                 }
             } ?: run {
                 textFieldValueState = it
-                if (value != it.text) {
-                    onValueChange(it.text)
+                if (value != it) {
+                    onValueChange(it)
                 }
             }
         },
@@ -133,7 +117,7 @@ fun InputTextPassword(
     isError: Boolean = false,
     errorText: String? = null,
     maxLines: Int = Int.MAX_VALUE,
-    maxLength: Int? = null
+    maxLength: Int? = null,
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
     InputTextPrimary(
