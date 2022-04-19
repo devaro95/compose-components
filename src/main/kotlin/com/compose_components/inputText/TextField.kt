@@ -2,11 +2,7 @@ package com.compose_components.inputText
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -18,6 +14,9 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -42,13 +42,17 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.compose_components.R
-import com.style.cornersRadius
-import com.style.dimen1
-import com.style.dimen14
-import com.style.dimen16
-import com.style.dimen20
-import com.style.dimen8
-import com.style.textSize14
+import com.style.*
+
+@Preview
+@Composable
+fun PreviewInputTextOutlined() {
+    InputTextOutlined(
+        value = "value",
+        label = "label",
+        onValueChange = {}
+    )
+}
 
 @Composable
 fun InputTextOutlined(
@@ -101,7 +105,7 @@ fun InputTextOutlined(
             Text(
                 color = MaterialTheme.colors.primary,
                 text = label,
-                fontSize = 10.sp
+                fontSize = textSize10
             )
         },
         placeholder = placeholder,
@@ -137,6 +141,17 @@ fun InputTextOutlined(
     }
 }
 
+@Preview
+@Composable
+fun PreviewInputTextOutlinedPassword() {
+    InputTextOutlinedPassword(
+        onTextChange = {},
+        value = "value",
+        label = "label",
+    )
+}
+
+
 @Composable
 fun InputTextOutlinedPassword(
     value: String,
@@ -169,7 +184,9 @@ fun InputTextOutlinedPassword(
                     .size(dimen20)
                     .clickable(
                         indication = null,
-                        interactionSource = remember { MutableInteractionSource() }) { passwordVisible = !passwordVisible },
+                        interactionSource = remember { MutableInteractionSource() }) {
+                        passwordVisible = !passwordVisible
+                    },
                 painter = painterResource(
                     if (passwordVisible) R.drawable.ic_password
                     else R.drawable.ic_password_hidden
@@ -185,8 +202,18 @@ fun InputTextOutlinedPassword(
 
 @Preview
 @Composable
-fun Previeww() {
-    InputText(onTextChange = {}, value = "value", label = "label")
+fun PreviewInputText() {
+    InputText(onTextChange = {},
+        value = "value",
+        label = "label",
+        startIcon = { Icon(imageVector = Icons.Filled.Search, contentDescription = null) },
+        endIcon = {
+            Icon(painter = painterResource(id = R.drawable.ic_single_person),
+                contentDescription = null,
+                modifier = Modifier.size(dimen20)
+            )
+        }
+    )
 }
 
 @Composable
@@ -194,18 +221,30 @@ fun InputText(
     backgroundColor: Color = Color.White,
     textColor: Color = MaterialTheme.colors.primary,
     labelColor: Color = MaterialTheme.colors.secondary,
-    startIcon: Int = R.drawable.ic_password,
-    startIconTint: Color = MaterialTheme.colors.secondary,
+    startIcon: @Composable (() -> Unit)? = null,
+    endIcon: @Composable (() -> Unit)? = null,
+    placeholder: @Composable (() -> Unit)? = null,
     radius: Dp = cornersRadius,
     value: String,
-    label: String,
-    onTextChange: (String) -> Unit,
+    label: String? = null,
+    isUnderlined: Boolean = true,
+    onTextChange: ((String) -> Unit)? = null,
 ) {
     Box(contentAlignment = Alignment.BottomCenter) {
         TextField(
             modifier = Modifier.fillMaxWidth(),
             value = value,
-            onValueChange = { onTextChange(it) },
+            label = {
+                label?.let {
+                    Text(
+                        text = label,
+                        fontSize = textSize10,
+                        fontWeight = FontWeight.Normal)
+                }
+            },
+            onValueChange = { value ->
+                onTextChange?.let { it(value) }
+            },
             shape = RoundedCornerShape(radius),
             colors = TextFieldDefaults.textFieldColors(
                 textColor = textColor,
@@ -213,24 +252,19 @@ fun InputText(
                 focusedLabelColor = labelColor,
                 unfocusedLabelColor = labelColor
             ),
-            leadingIcon = {
-                Icon(
-                    modifier = Modifier.size(dimen16),
-                    painter = painterResource(id = startIcon),
-                    contentDescription = null,
-                    tint = startIconTint
-                )
-            },
-            label = { Text(text = label, fontSize = textSize14, fontWeight = FontWeight.Normal) }
+            leadingIcon = startIcon,
+            trailingIcon = endIcon,
+            placeholder = placeholder
         )
-        Divider(Modifier
-            .padding(
-                top = dimen8,
-                start = 52.dp,
-                end = dimen16,
-                bottom = dimen14
-            )
-            .height(dimen1),
-            color = MaterialTheme.colors.secondary)
+        if (isUnderlined) {
+            Divider(Modifier
+                .padding(
+                    start = 52.dp,
+                    end = dimen16,
+                    bottom = dimen12
+                )
+                .height(dimen1),
+                color = MaterialTheme.colors.secondary)
+        }
     }
 }
