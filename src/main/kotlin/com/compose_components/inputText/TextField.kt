@@ -203,8 +203,8 @@ fun InputTextOutlinedPassword(
 @Preview
 @Composable
 fun PreviewInputText() {
-    InputText(onTextChange = {},
-        value = "value",
+    InputText(onValueChange = {},
+        value = "",
         label = "label",
         startIcon = { Icon(imageVector = Icons.Filled.Search, contentDescription = null) },
         endIcon = {
@@ -218,32 +218,50 @@ fun PreviewInputText() {
 
 @Composable
 fun InputText(
+    modifier: Modifier = Modifier,
     backgroundColor: Color = Color.White,
     textColor: Color = MaterialTheme.colors.primary,
     labelColor: Color = MaterialTheme.colors.secondary,
     startIcon: @Composable (() -> Unit)? = null,
     endIcon: @Composable (() -> Unit)? = null,
-    placeholder: @Composable (() -> Unit)? = null,
+    placeholder: String = "",
     radius: Dp = cornersRadius,
-    value: String,
+    value: String = "",
     label: String? = null,
     isUnderlined: Boolean = true,
-    onTextChange: ((String) -> Unit)? = null,
+    onValueChange: ((String) -> Unit),
+    maxLength: Int? = null,
 ) {
+    var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
+    val textFieldValue = textFieldValueState.copy(text = value)
     Box(contentAlignment = Alignment.BottomCenter) {
         TextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = value,
+            modifier = modifier,
+            value = textFieldValue,
+            onValueChange = {
+                maxLength?.let { maxLength ->
+                    if (it.text.length <= maxLength) {
+                        textFieldValueState = it
+                        if (value != it.text) {
+                            onValueChange(it.text)
+                        }
+                    }
+                } ?: run {
+                    textFieldValueState = it
+                    if (value != it.text) {
+                        onValueChange(it.text)
+                    }
+                }
+            },
             label = {
                 label?.let {
                     Text(
                         text = label,
                         fontSize = textSize10,
-                        fontWeight = FontWeight.Normal)
+                        fontWeight = FontWeight.Normal,
+                        color = colorResource(id = R.color.grey)
+                    )
                 }
-            },
-            onValueChange = { value ->
-                onTextChange?.let { it(value) }
             },
             shape = RoundedCornerShape(radius),
             colors = TextFieldDefaults.textFieldColors(
@@ -254,12 +272,12 @@ fun InputText(
             ),
             leadingIcon = startIcon,
             trailingIcon = endIcon,
-            placeholder = placeholder
+            placeholder = { Text(text = placeholder, color = colorResource(id = R.color.grey)) }
         )
         if (isUnderlined) {
             Divider(Modifier
                 .padding(
-                    start = 52.dp,
+                    start = dimen52,
                     end = dimen16,
                     bottom = dimen12
                 )
