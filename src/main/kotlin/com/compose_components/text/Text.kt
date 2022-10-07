@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -103,6 +104,46 @@ fun TextMain(
         maxLines = maxLines,
         onTextLayout = onTextLayout,
         style = style
+    )
+}
+
+@Composable
+fun TextMainClickable(
+    text: String,
+    modifier: Modifier = Modifier,
+    fontSize: TextUnit = TextUnit.Unspecified,
+    fontStyle: FontStyle? = null,
+    fontWeight: FontWeight? = null,
+    fontFamily: FontFamily? = null,
+    letterSpacing: TextUnit = TextUnit.Unspecified,
+    textDecoration: TextDecoration? = null,
+    textAlign: TextAlign? = null,
+    lineHeight: TextUnit = TextUnit.Unspecified,
+    overflow: TextOverflow = TextOverflow.Clip,
+    softWrap: Boolean = true,
+    maxLines: Int = Int.MAX_VALUE,
+    color: Color? = null,
+    onClick: (() -> Unit)? = null,
+    style: TextStyle = LocalTextStyle.current,
+) {
+    ClickableText(
+        text = AnnotatedString(text),
+        style = style.copy(
+            color = color ?: MaterialTheme.colors.primary,
+            fontSize = fontSize,
+            fontStyle = fontStyle,
+            fontWeight = fontWeight,
+            fontFamily = fontFamily,
+            letterSpacing = letterSpacing,
+            textDecoration = textDecoration,
+            textAlign = textAlign,
+            lineHeight = lineHeight,
+        ),
+        modifier = modifier,
+        overflow = overflow,
+        softWrap = softWrap,
+        maxLines = maxLines,
+        onClick = { onClick?.invoke() }
     )
 }
 
