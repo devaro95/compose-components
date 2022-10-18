@@ -6,6 +6,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import com.style.dimen16
@@ -40,6 +41,7 @@ fun IconClickable(
     icon: Int,
     iconSize: Dp = dimen16,
     contentDescription: String? = null,
+    iconTint: Color = MaterialTheme.colors.primary,
 ) {
     Icon(
         modifier = modifier
@@ -47,6 +49,6 @@ fun IconClickable(
             .clickable { onClickListener.invoke() },
         painter = painterResource(icon),
         contentDescription = contentDescription,
-        tint = MaterialTheme.colors.primary
+        tint = iconTint
     )
 }

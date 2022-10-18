@@ -109,7 +109,7 @@ fun TextMain(
 
 @Composable
 fun TextMainClickable(
-    text: String,
+    text: AnnotatedString,
     modifier: Modifier = Modifier,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
@@ -127,7 +127,7 @@ fun TextMainClickable(
     style: TextStyle = LocalTextStyle.current,
 ) {
     ClickableText(
-        text = AnnotatedString(text),
+        text = text,
         style = style.copy(
             color = color ?: MaterialTheme.colors.primary,
             fontSize = fontSize,
