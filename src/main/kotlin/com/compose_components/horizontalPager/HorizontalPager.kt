@@ -2,12 +2,13 @@ package com.compose_components.horizontalPager
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
+import com.constants.ZERO
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 
 @ExperimentalPagerApi
 @Composable
-fun createPagerState(pages: Int, initial: Int = 0, infinite: Boolean = false, initialOffScreen: Int = 2): PagerState {
+fun createPagerState(pages: Int, initial: Int = ZERO, infinite: Boolean = false, initialOffScreen: Int = 2): PagerState {
     return rememberPagerState(
         pageCount = pages,
         initialOffscreenLimit = initialOffScreen,
@@ -20,7 +21,7 @@ fun createPagerState(pages: Int, initial: Int = 0, infinite: Boolean = false, in
 @Composable
 fun rememberPagerState(
     pageCount: Int,
-    initialPage: Int = 0,
+    initialPage: Int = ZERO,
     initialPageOffset: Float = 0f,
     initialOffscreenLimit: Int = 1,
     infiniteLoop: Boolean = false,
