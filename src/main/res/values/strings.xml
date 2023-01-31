@@ -1,1 +1,5 @@
-<resources />
+<resources>
+    <string name="terms_and_privacy_text">Al acceder, estás aceptando los</string>
+    <string name="terms_and_privacy">Términos de uso y la Política de privacidad</string>
+    <string name="terms_and_privacy_end">de nuestra aplicación.</string>
+</resources>
