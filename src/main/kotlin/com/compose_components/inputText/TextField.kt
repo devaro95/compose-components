@@ -32,13 +32,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.compose_components.R
+import com.constants.LINE_JUMP_CHAR
+import com.constants.ZERO
 import com.extensions.removeLineJump
 import com.style.dimen20
 import com.style.dimen8
-
-const val LINE_JUMP_CHAR = '\n'
-const val LINE_JUMP_STRING = "\n"
-const val EMPTY = ""
 
 @Composable
 fun InputTextPrimary(
@@ -135,7 +133,7 @@ fun InputTextPassword(
     isError: Boolean = false,
     errorText: String? = null,
     maxLines: Int = Int.MAX_VALUE,
-    maxLength: Int = 0,
+    maxLength: Int = ZERO,
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
     InputTextPrimary(

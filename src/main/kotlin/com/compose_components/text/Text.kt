@@ -24,10 +24,9 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
+import com.constants.DEFAULT_MIN_LENGTH
+import com.constants.SPACE
 import com.style.dimen8
-
-const val SPACE = " "
-const val DEFAULT_MIN_LENGTH = 0
 
 @Composable
 fun TextMain(
