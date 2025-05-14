@@ -20,7 +20,7 @@ fun TermsAndPrivacyTextPreview() = TermsAndPrivacyText({})
 fun TermsAndPrivacyText(
     onClickListener: () -> Unit,
     modifier: Modifier = Modifier,
-    textAlign: TextAlign? = null
+    textAlign: TextAlign = TextAlign.Unspecified,
 ) {
     TextMainClickable(
         modifier = modifier,

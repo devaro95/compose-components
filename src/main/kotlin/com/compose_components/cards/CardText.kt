@@ -3,7 +3,8 @@ package com.compose_components.cards
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,8 +32,10 @@ fun CardText(
         modifier = Modifier
             .padding(end = dimen8)
             .fillMaxWidth(),
-        backgroundColor = backgroundColor,
-        elevation = elevation
+        colors = CardDefaults.cardColors(
+            containerColor = backgroundColor
+        ),
+        elevation = CardDefaults.cardElevation(elevation)
     ) {
         Column(modifier = Modifier.padding(contentPadding)) {
             Text(
@@ -47,14 +50,16 @@ fun CardText(
 fun CardText(text: String, isActive: Boolean) {
     Card(
         modifier = Modifier.padding(end = dimen8),
-        backgroundColor = if (isActive) MaterialTheme.colors.primary else MaterialTheme.colors.primaryVariant,
-        border = if (isActive) null else BorderStroke(dimen1, MaterialTheme.colors.primary)
+        colors = CardDefaults.cardColors(
+            containerColor = if (isActive) MainColor else TextSecondary,
+        ),
+        border = if (isActive) null else BorderStroke(dimen1, MainColor)
     )
     {
         Text(
             modifier = Modifier.padding(dimen8),
             text = text,
-            color = if (isActive) MaterialTheme.colors.primaryVariant else MaterialTheme.colors.primary
+            color = if (isActive) TextSecondary else TextPrimary
         )
     }
 }

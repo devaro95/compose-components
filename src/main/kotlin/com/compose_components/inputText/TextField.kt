@@ -2,41 +2,27 @@ package com.compose_components.inputText
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.compose_components.R
+import com.compose_components.text.TextMain
 import com.constants.LINE_JUMP_CHAR
 import com.constants.ZERO
 import com.extensions.removeLineJump
-import com.style.dimen20
-import com.style.dimen8
+import com.style.*
 
 @Composable
 fun InputTextPrimary(
@@ -62,6 +48,9 @@ fun InputTextPrimary(
     disableLineJump: Boolean = false,
 ) {
     var textFieldValueState by remember { mutableStateOf(value) }
+    LaunchedEffect(value) {
+        textFieldValueState = value
+    }
     val focusManager = LocalFocusManager.current
     OutlinedTextField(
         enabled = enabled,
@@ -84,10 +73,10 @@ fun InputTextPrimary(
         singleLine = singleLine,
         textStyle = textStyle,
         label = {
-            Text(
-                color = MaterialTheme.colors.primary,
+            TextMain(
+                color = TextPrimary,
                 text = label,
-                fontSize = 10.sp
+                fontSize = 14.sp
             )
         },
         placeholder = placeholder,
@@ -107,17 +96,15 @@ fun InputTextPrimary(
                 focusManager.moveFocus(FocusDirection.Down)
             }
         ),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            textColor = MaterialTheme.colors.primary
-        )
+        colors = inputColorsDefault
     )
     if (isError && errorText != null) {
-        Text(
+        TextMain(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = dimen8),
             text = errorText,
-            color = MaterialTheme.colors.error,
+            color = TextError,
             textAlign = TextAlign.Start
         )
     }
@@ -142,8 +129,8 @@ fun InputTextPassword(
         onValueChange = { onTextChange(it) },
         textStyle = textStyle,
         visualTransformation =
-        if (passwordVisible) VisualTransformation.None
-        else PasswordVisualTransformation(),
+            if (passwordVisible) VisualTransformation.None
+            else PasswordVisualTransformation(),
         label = label,
         inputType = KeyboardType.Password,
         isError = isError,
@@ -160,7 +147,7 @@ fun InputTextPassword(
                     if (passwordVisible) R.drawable.ic_password
                     else R.drawable.ic_password_hidden
                 ),
-                tint = MaterialTheme.colors.primary,
+                tint = TextPrimary,
                 contentDescription = null
             )
         },

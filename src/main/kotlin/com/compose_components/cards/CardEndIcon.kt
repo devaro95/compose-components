@@ -3,26 +3,21 @@ package com.compose_components.cards
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.compose_components.text.TextMain
-import com.style.cornersRadius
-import com.style.dimen16
-import com.style.dimen20
-import com.style.dimen8
+import com.style.*
 
 @Preview
 @Composable
 fun CardButtonPreview() {
     CardButton(
         text = "esto es el label",
-        backgroundColor = Color.White,
         icon = 1
     )
 }
@@ -30,21 +25,21 @@ fun CardButtonPreview() {
 @Composable
 fun CardButton(
     text: String,
-    backgroundColor: Color = Color.White,
+    colors: CardColors = CardColorsDefaults,
     elevation: Dp = dimen8,
     contentPadding: Dp = dimen16,
     cornerRadius: Dp = cornersRadius,
     icon: Int,
     iconSize: Dp = dimen20,
-    onIconClick: (() -> Unit)? = null
+    onIconClick: (() -> Unit)? = null,
 ) {
     Card(
         shape = RoundedCornerShape(cornerRadius),
         modifier = Modifier
             .padding(end = dimen8)
             .fillMaxWidth(),
-        backgroundColor = backgroundColor,
-        elevation = elevation
+        colors = colors,
+        elevation = CardDefaults.cardElevation(elevation)
     ) {
         Column(modifier = Modifier.padding(contentPadding)) {
             Row(
@@ -62,7 +57,7 @@ fun CardButton(
                         modifier = Modifier
                             .size(iconSize)
                             .clickable { onIconClick?.invoke() },
-                        tint = MaterialTheme.colors.primary
+                        tint = MainColor
                     )
                 }
             }
