@@ -3,7 +3,8 @@ package com.compose_components.cards
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -59,10 +60,10 @@ fun CardIconNavigation(
     contentPadding: Dp = dimen16,
     textSeparation: Dp = dimen16,
     cornerRadius: Dp = cornersRadius,
-    textColor: Color = MaterialTheme.colors.primary,
-    messageColor: Color = MaterialTheme.colors.primary,
-    startIconTint: Color = MaterialTheme.colors.primary,
-    endIconTint: Color = MaterialTheme.colors.primary,
+    textColor: Color = MainColor,
+    messageColor: Color = MainColor,
+    startIconTint: Color = MainColor,
+    endIconTint: Color = MainColor,
     onClickListener: (() -> Unit)? = null,
     startIconContentDescription: String? = null,
     endIconContentDescription: String? = null,
@@ -73,7 +74,8 @@ fun CardIconNavigation(
         modifier = modifier
             .fillMaxWidth()
             .clickable { onClickListener?.invoke() },
-        elevation = elevation
+        elevation = CardDefaults.cardElevation(elevation),
+        colors = CardColorsDefaults
     ) {
         Column(modifier = Modifier.padding(contentPadding)) {
             Row(verticalAlignment = Alignment.CenterVertically) {

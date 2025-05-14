@@ -10,6 +10,9 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.style.AlternativeColor
+import com.style.MainColor
+import com.style.SecondaryColor
 
 @Composable
 fun MainSwipeRefresh(
@@ -36,8 +39,8 @@ fun MainSwipeRefresh(
                 state = indicatorState,
                 refreshTriggerDistance = indicatorTrigger,
                 scale = true,
-                backgroundColor = MaterialTheme.colors.primary,
-                contentColor = MaterialTheme.colors.primaryVariant
+                backgroundColor = MainColor,
+                contentColor = SecondaryColor
             )
         },
         clipIndicatorToPadding = clipIndicatorToPadding,

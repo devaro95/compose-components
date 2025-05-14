@@ -3,15 +3,17 @@ package com.compose_components.cards
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.compose_components.R
 import com.compose_components.text.TextMain
 import com.style.*
@@ -53,8 +55,8 @@ fun CardIcon(
     contentPadding: Dp = dimen16,
     textSeparation: Dp = dimen16,
     cornerRadius: Dp = cornersRadius,
-    textColor: Color = MaterialTheme.colors.primary,
-    iconTint: Color = MaterialTheme.colors.primary,
+    textColor: Color = MainColor,
+    iconTint: Color = MainColor,
     onClickListener: (() -> Unit)? = null,
     contentDescription: String? = null,
     fontWeight: FontWeight = FontWeight.Normal,
@@ -64,7 +66,8 @@ fun CardIcon(
         modifier = modifier
             .fillMaxWidth()
             .clickable { onClickListener?.invoke() },
-        elevation = elevation
+        elevation = CardDefaults.cardElevation(elevation),
+        colors = CardColorsDefaults
     ) {
         Column(modifier = Modifier.padding(contentPadding)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -113,8 +116,8 @@ fun CardIconSwitch(
     contentPadding: Dp = dimen16,
     textSeparation: Dp = dimen16,
     cornerRadius: Dp = cornersRadius,
-    textColor: Color = MaterialTheme.colors.primary,
-    iconTint: Color = MaterialTheme.colors.primary,
+    textColor: Color = MainColor,
+    iconTint: Color = MainColor,
     isChecked: Boolean,
     switchColors: SwitchColors? = null,
     maxLines: Int = 1,
@@ -124,7 +127,8 @@ fun CardIconSwitch(
     Card(
         shape = RoundedCornerShape(cornerRadius),
         modifier = modifier.fillMaxWidth(),
-        elevation = elevation
+        elevation = CardDefaults.cardElevation(elevation),
+        colors = CardColorsDefaults
     ) {
         Column(modifier = Modifier.padding(horizontal = contentPadding)) {
             Row(
@@ -143,17 +147,28 @@ fun CardIconSwitch(
                         .weight(9f),
                     text = label,
                     color = textColor,
-                    maxLines = maxLines)
-                Switch(
-                    modifier = Modifier.weight(1f),
-                    checked = isChecked,
-                    onCheckedChange = { onChangeListener?.invoke(it) },
-                    colors = switchColors ?: SwitchDefaults.colors(
-                        checkedThumbColor = MaterialTheme.colors.primary,
-                        uncheckedThumbColor = MaterialTheme.colors.primary,
-                        uncheckedTrackColor = GreyColor
-                    )
+                    maxLines = maxLines
                 )
+                Column(
+                    modifier = Modifier
+                        .weight(1f),
+                ) {
+                    Switch(
+                        modifier = Modifier
+                            .scale(scaleX = 0.7f, scaleY = 0.7f)
+                            .padding(end = 16.dp),
+                        checked = isChecked,
+                        onCheckedChange = { onChangeListener?.invoke(it) },
+                        colors = switchColors ?: SwitchDefaults.colors(
+                            checkedTrackColor = SecondaryColor,
+                            checkedThumbColor = MainColor,
+                            uncheckedThumbColor = MainColor,
+                            uncheckedTrackColor = SwitchDisabled,
+                            checkedBorderColor = MainColor,
+                            uncheckedBorderColor = MainColor,
+                        )
+                    )
+                }
             }
         }
     }
