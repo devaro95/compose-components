@@ -10,25 +10,25 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.*
 import androidx.compose.ui.text.style.*
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
+import com.compose_components.R
 import com.style.TextPrimary
 
 @Composable
 fun TextMain(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
-    fontSize: TextUnit = TextUnit.Unspecified,
+    fontSize: TextUnit = 16.sp,
     fontStyle: FontStyle? = null,
-    fontWeight: FontWeight? = null,
-    fontFamily: FontFamily? = null,
-    letterSpacing: TextUnit = TextUnit.Unspecified,
+    fontWeight: FontWeight = FontWeight.Normal,
+    fontFamily: FontFamily = FontFamily(Font(R.font.open_sans_regular)),
+    letterSpacing: TextUnit = 0.5.sp,
     textDecoration: TextDecoration? = null,
     textAlign: TextAlign? = null,
-    lineHeight: TextUnit = TextUnit.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-    style: TextStyle = LocalTextStyle.current,
     color: Color? = null,
 ) {
     Text(
@@ -42,12 +42,11 @@ fun TextMain(
         letterSpacing = letterSpacing,
         textDecoration = textDecoration,
         textAlign = textAlign,
-        lineHeight = lineHeight,
         overflow = overflow,
         softWrap = softWrap,
         maxLines = maxLines,
         onTextLayout = onTextLayout,
-        style = style
+        lineHeight = (fontSize.value + 2).sp
     )
 }
 
@@ -55,14 +54,13 @@ fun TextMain(
 fun TextMain(
     text: String,
     modifier: Modifier = Modifier,
-    fontSize: TextUnit = TextUnit.Unspecified,
+    fontSize: TextUnit = 16.sp,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,
-    fontFamily: FontFamily? = null,
-    letterSpacing: TextUnit = TextUnit.Unspecified,
+    fontFamily: FontFamily = FontFamily(Font(R.font.open_sans_regular)),
+    letterSpacing: TextUnit = 0.5.sp,
     textDecoration: TextDecoration? = null,
     textAlign: TextAlign? = null,
-    lineHeight: TextUnit = TextUnit.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
@@ -81,7 +79,7 @@ fun TextMain(
         letterSpacing = letterSpacing,
         textDecoration = textDecoration,
         textAlign = textAlign,
-        lineHeight = lineHeight,
+        lineHeight = (fontSize.value + 2).sp,
         overflow = overflow,
         softWrap = softWrap,
         maxLines = maxLines,
@@ -97,7 +95,7 @@ fun TextMainClickable(
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,
-    fontFamily: FontFamily? = null,
+    fontFamily: FontFamily = FontFamily(Font(R.font.open_sans_regular)),
     letterSpacing: TextUnit = TextUnit.Unspecified,
     textDecoration: TextDecoration? = null,
     textAlign: TextAlign = TextAlign.Unspecified,

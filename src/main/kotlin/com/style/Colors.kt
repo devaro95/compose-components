@@ -1,6 +1,7 @@
 package com.style
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -8,13 +9,11 @@ import androidx.compose.ui.graphics.Color
 val PrimaryColor = Color(0xFF18191A)
 val AlternativeColor = Color(0xFF242526)
 
-val TextAlternative = Color(0xFF464646)
-val TextError = Color(0xFFA53C3C)
+val RedColor = Color(0xFFA53C3C)
 val InputBorderColor @Composable get() = MainColor
 val IconPrimary @Composable get() = MainColor
 val BackgroundColor2 = Color.White
 val DarkBackgroundColor = Color(0xFF18191A)
-val DarkMainColor = Color.White
 val SkeletonColor = Color(0xFFB0BEC5)
 
 val DisabledColor = Color(0xFF2C2D2E)
@@ -22,6 +21,11 @@ val DisabledLightColor = Color(0xFFF2F2F2)
 
 val DisabledText = Color(0xFF7A7A7A)
 val DisabledLightText = Color(0xFFB0B0B0)
+
+val BackgroundColor
+    @Composable get() =
+        if (isSystemInDarkTheme()) DarkBackgroundColor
+        else BackgroundColor2
 
 val MainColor
     @Composable get() =
@@ -88,6 +92,11 @@ val BottomSheetBackgroundColor
         if (isSystemInDarkTheme()) AlternativeColor
         else Color.White
 
+val CardBorderColor
+    @Composable get() =
+        if (isSystemInDarkTheme()) Color(0xFF464646)
+        else Color(0xFF18191A)
+
 val OSButtonDefault
     @Composable get() = ButtonDefaults.buttonColors(
         containerColor = if (isSystemInDarkTheme()) Color.White else PrimaryColor,
@@ -108,7 +117,13 @@ val inputColorsDefault
         focusedContainerColor = Color.Transparent,
         errorContainerColor = Color.Transparent,
         disabledContainerColor = Color.Transparent,
-        unfocusedContainerColor = Color.Transparent
+        unfocusedContainerColor = Color.Transparent,
+        focusedIndicatorColor = TextPrimary,
+        cursorColor = TextPrimary,
+        selectionColors = TextSelectionColors(
+            handleColor = TextPrimary,
+            backgroundColor = TextPrimary.copy(alpha = 0.4f)
+        )
     )
 
 val CardColorsDefaults

@@ -9,7 +9,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 33
+        minSdk = 26
     }
 
     compileOptions {
@@ -31,8 +31,6 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.animation)
     implementation(libs.tooling)
-    implementation(libs.view.model)
-    implementation(libs.livedata)
     implementation(libs.pager)
     implementation(libs.pager.indicators)
     implementation(libs.swipe.refresh)

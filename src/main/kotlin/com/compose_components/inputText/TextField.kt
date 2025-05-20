@@ -13,6 +13,8 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -31,7 +33,10 @@ fun InputTextPrimary(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     readOnly: Boolean = false,
-    textStyle: TextStyle = LocalTextStyle.current,
+    textStyle: TextStyle = TextStyle(
+        fontFamily = FontFamily(Font(R.font.open_sans_regular)),
+        fontSize = 16.sp
+    ),
     label: String,
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
@@ -104,7 +109,7 @@ fun InputTextPrimary(
                 .fillMaxWidth()
                 .padding(start = dimen8),
             text = errorText,
-            color = TextError,
+            color = RedColor,
             textAlign = TextAlign.Start
         )
     }
@@ -144,7 +149,7 @@ fun InputTextPassword(
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() }) { passwordVisible = !passwordVisible },
                 painter = painterResource(
-                    if (passwordVisible) R.drawable.ic_password
+                    if (passwordVisible) R.drawable.ic_password_visible
                     else R.drawable.ic_password_hidden
                 ),
                 tint = TextPrimary,
