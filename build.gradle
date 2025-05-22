@@ -26,15 +26,11 @@ android {
 
 }
 dependencies {
-    implementation(libs.activity.compose)
-    implementation(libs.material.compose)
-    implementation(libs.material3)
+    implementation(libs.vro.compose)
+
     implementation(libs.animation)
-    implementation(libs.tooling)
     implementation(libs.pager)
     implementation(libs.pager.indicators)
     implementation(libs.swipe.refresh)
-    implementation(libs.compose.constraint.layout)
     implementation(libs.lottie.compose)
-    implementation(libs.vro.common)
 }
