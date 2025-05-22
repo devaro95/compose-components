@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import com.style.IconPrimary
+import com.style.dimen18
 import com.style.dimen20
 import com.style.dimen24
 
@@ -21,8 +22,9 @@ fun IconChanger(
     iconCondition: Boolean,
     selectedIcon: Int,
     deselectedIcon: Int,
-    iconSize: Dp = dimen20,
+    iconSize: Dp = dimen18,
     contentDescription: String? = null,
+    iconTint: Color = IconPrimary,
 ) {
     Icon(
         modifier = modifier
@@ -36,7 +38,7 @@ fun IconChanger(
             else deselectedIcon
         ),
         contentDescription = contentDescription,
-        tint = IconPrimary
+        tint = iconTint
     )
 }
 

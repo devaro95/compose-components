@@ -30,24 +30,26 @@ fun OSButton(
         enabled = enabled,
         border = buttonType.border()
     ) {
-        startIcon?.let {
-            Image(
-                painter = painterResource(it),
-                contentDescription = null,
-                modifier = Modifier.size(16.dp)
+        Row(modifier = Modifier.padding(vertical = 8.dp)) {
+            startIcon?.let {
+                Image(
+                    painter = painterResource(it),
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+            }
+            TextMain(
+                text = text,
+                color = buttonType.textColor(enabled)
             )
-            Spacer(modifier = Modifier.width(8.dp))
-        }
-        TextMain(
-            text = text,
-            color = buttonType.textColor(enabled)
-        )
-        endIcon?.let {
-            Image(
-                painter = painterResource(it),
-                contentDescription = null,
-                modifier = Modifier.size(16.dp)
-            )
+            endIcon?.let {
+                Image(
+                    painter = painterResource(it),
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp)
+                )
+            }
         }
     }
 }

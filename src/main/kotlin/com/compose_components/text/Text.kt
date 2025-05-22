@@ -21,7 +21,7 @@ fun TextMain(
     fontSize: TextUnit = 16.sp,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight = FontWeight.Normal,
-    fontFamily: FontFamily = FontFamily(Font(R.font.open_sans_regular)),
+    fontFamily: FontFamily = FontFamily(Font(R.font.inter_regular)),
     letterSpacing: TextUnit = 0.5.sp,
     textDecoration: TextDecoration? = null,
     textAlign: TextAlign? = null,
@@ -29,6 +29,7 @@ fun TextMain(
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
+    lineHeight: TextUnit? = null,
     color: Color? = null,
 ) {
     Text(
@@ -46,7 +47,7 @@ fun TextMain(
         softWrap = softWrap,
         maxLines = maxLines,
         onTextLayout = onTextLayout,
-        lineHeight = (fontSize.value + 2).sp
+        lineHeight = lineHeight ?: (fontSize.value + 2).sp
     )
 }
 
@@ -57,7 +58,7 @@ fun TextMain(
     fontSize: TextUnit = 16.sp,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,
-    fontFamily: FontFamily = FontFamily(Font(R.font.open_sans_regular)),
+    fontFamily: FontFamily = FontFamily(Font(R.font.inter_regular)),
     letterSpacing: TextUnit = 0.5.sp,
     textDecoration: TextDecoration? = null,
     textAlign: TextAlign? = null,
@@ -65,6 +66,7 @@ fun TextMain(
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
+    lineHeight: TextUnit? = null,
     style: TextStyle = LocalTextStyle.current,
     color: Color? = null,
 ) {
@@ -79,12 +81,12 @@ fun TextMain(
         letterSpacing = letterSpacing,
         textDecoration = textDecoration,
         textAlign = textAlign,
-        lineHeight = (fontSize.value + 2).sp,
         overflow = overflow,
         softWrap = softWrap,
         maxLines = maxLines,
         onTextLayout = onTextLayout,
-        style = style
+        style = style,
+        lineHeight = lineHeight ?: (fontSize.value + 2).sp
     )
 }
 
@@ -95,7 +97,7 @@ fun TextMainClickable(
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,
-    fontFamily: FontFamily = FontFamily(Font(R.font.open_sans_regular)),
+    fontFamily: FontFamily = FontFamily(Font(R.font.inter_regular)),
     letterSpacing: TextUnit = TextUnit.Unspecified,
     textDecoration: TextDecoration? = null,
     textAlign: TextAlign = TextAlign.Unspecified,

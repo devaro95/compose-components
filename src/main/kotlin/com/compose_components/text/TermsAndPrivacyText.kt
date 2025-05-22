@@ -10,7 +10,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import com.compose_components.R
-import com.constants.SPACE
+import com.vro.constants.SPACE
 
 @Composable
 @Preview

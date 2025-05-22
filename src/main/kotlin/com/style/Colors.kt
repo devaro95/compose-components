@@ -12,7 +12,7 @@ val AlternativeColor = Color(0xFF242526)
 val RedColor = Color(0xFFA53C3C)
 val InputBorderColor @Composable get() = MainColor
 val IconPrimary @Composable get() = MainColor
-val BackgroundColor2 = Color.White
+val LightBackgroundColor = Color(0xFFF8FAFC)
 val DarkBackgroundColor = Color(0xFF18191A)
 val SkeletonColor = Color(0xFFB0BEC5)
 
@@ -25,7 +25,7 @@ val DisabledLightText = Color(0xFFB0B0B0)
 val BackgroundColor
     @Composable get() =
         if (isSystemInDarkTheme()) DarkBackgroundColor
-        else BackgroundColor2
+        else LightBackgroundColor
 
 val MainColor
     @Composable get() =
@@ -107,18 +107,21 @@ val OSButtonDefault
 
 val OSButtonSecondaryDefault
     @Composable get() = ButtonDefaults.buttonColors(
-        containerColor = if (isSystemInDarkTheme()) PrimaryColor else Color.White,
+        containerColor = if (isSystemInDarkTheme()) PrimaryColor else Color.Transparent,
         contentColor = if (isSystemInDarkTheme()) Color.White else PrimaryColor,
     )
 
 val inputColorsDefault
     @Composable get() = TextFieldDefaults.colors(
-        focusedTextColor = TextPrimary,
-        focusedContainerColor = Color.Transparent,
-        errorContainerColor = Color.Transparent,
-        disabledContainerColor = Color.Transparent,
-        unfocusedContainerColor = Color.Transparent,
-        focusedIndicatorColor = TextPrimary,
+        focusedTextColor = HintColorV2,
+        focusedContainerColor = Color.White,
+        errorContainerColor = Color.White,
+        disabledContainerColor = Color.White,
+        unfocusedContainerColor = Color.White,
+        focusedIndicatorColor = Color.Transparent,
+        errorIndicatorColor = Color.Transparent,
+        disabledIndicatorColor = Color.Transparent,
+        unfocusedIndicatorColor = Color.Transparent,
         cursorColor = TextPrimary,
         selectionColors = TextSelectionColors(
             handleColor = TextPrimary,

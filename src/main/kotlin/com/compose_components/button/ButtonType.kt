@@ -11,6 +11,7 @@ import com.style.ButtonTextColor
 import com.style.InputBorderColor
 import com.style.OSButtonDefault
 import com.style.OSButtonSecondaryDefault
+import com.style.SecondaryColorV2
 
 enum class ButtonType(
     val colors: @Composable () -> ButtonColors,
@@ -24,7 +25,7 @@ enum class ButtonType(
     ),
     SECONDARY(
         colors = { OSButtonSecondaryDefault },
-        border = { BorderStroke(1.dp, InputBorderColor) },
+        border = { BorderStroke(1.dp, SecondaryColorV2) },
         textColor = { ButtonSecondaryColor }
     )
 
