@@ -2,4 +2,6 @@
     <string name="terms_and_privacy_text">Al acceder, estás aceptando los</string>
     <string name="terms_and_privacy">Términos de uso y la Política de privacidad</string>
     <string name="terms_and_privacy_end">de nuestra aplicación.</string>
+    <string name="character_counter_separator">/ %S</string>
+    <string name="min_length_error">Mínimo %s caracteres</string>
 </resources>
